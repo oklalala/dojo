@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'posts#index'
 
   namespace :admin do
-    root 'posts#index'
+    resources :users, only: %i[index edit update]
+    root 'users#index'
   end
 end

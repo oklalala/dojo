@@ -1,0 +1,13 @@
+<h1>後台</h1>
+<ul>
+  <% @users.each do |user| %>
+  <li>
+    <%= user.name %>
+    <%= user.email %>
+    <%= form_for [:admin, user] do |f| %>
+      <%= f.select(:role, [['Admin', 'admin'], ['Normal', 'normal']]) %>
+      <%= f.submit %>
+    <% end %>
+  </li>
+  <% end %>
+</ul>
