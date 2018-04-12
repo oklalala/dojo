@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Posts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Contant</th>
+      <th>Photo</th>
+      <th>Status</th>
+      <th>Replies count</th>
+      <th>Viewed count</th>
+      <th>Who can see</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.title %></td>
+        <td><%= post.contant %></td>
+        <td><%= post.photo %></td>
+        <td><%= post.status %></td>
+        <td><%= post.replies_count %></td>
+        <td><%= post.viewed_count %></td>
+        <td><%= post.who_can_see %></td>
+        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Post', new_post_path %>
