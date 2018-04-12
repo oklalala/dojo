@@ -1,13 +1,39 @@
 <h1>後台</h1>
-<ul>
-  <% @users.each do |user| %>
-  <li>
-    <%= user.name %>
-    <%= user.email %>
-    <%= form_for [:admin, user] do |f| %>
-      <%= f.select(:role, [['Admin', 'admin'], ['Normal', 'normal']]) %>
-      <%= f.submit %>
-    <% end %>
-  </li>
-  <% end %>
-</ul>
+
+<div>
+  <%#= link_to 'Categories', admin_tweets_path %>
+  |
+  <%= link_to 'Users', admin_users_path %>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <br>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%= form_for [:admin, user] do |f| %>
+              <%= f.select(:role, [['Admin', 'admin'], ['Normal', 'normal']]) %>
+              <%= f.submit %>
+            <% end %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <!-- <div class="text-center">
+      <%#= paginate @users %>
+    </div> -->
+  </div>
+</div>
