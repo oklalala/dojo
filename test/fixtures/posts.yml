@@ -2,7 +2,7 @@
 
 one:
   title: MyString
-  contant: MyText
+  content: MyText
   photo: MyString
   status: MyString
   replies_count: 1
@@ -11,7 +11,7 @@ one:
 
 two:
   title: MyString
-  contant: MyText
+  content: MyText
   photo: MyString
   status: MyString
   replies_count: 1

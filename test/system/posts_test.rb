@@ -16,7 +16,7 @@ class PostsTest < ApplicationSystemTestCase
     visit posts_url
     click_on 'New Post'
 
-    fill_in 'Contant', with: @post.contant
+    fill_in 'Content', with: @post.content
     fill_in 'Photo', with: @post.photo
     fill_in 'Replies Count', with: @post.replies_count
     fill_in 'Status', with: @post.status
@@ -33,7 +33,7 @@ class PostsTest < ApplicationSystemTestCase
     visit posts_url
     click_on 'Edit', match: :first
 
-    fill_in 'Contant', with: @post.contant
+    fill_in 'Content', with: @post.content
     fill_in 'Photo', with: @post.photo
     fill_in 'Replies Count', with: @post.replies_count
     fill_in 'Status', with: @post.status
