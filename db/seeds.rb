@@ -23,8 +23,8 @@ puts 'Category created!'
 User.destroy_all
 photo = "pic1_#{rand(72).to_s.rjust(3, '0')}.jpg"
 User.create(
-  id: "1",
-  name:"Tony", 
+  id: 1,
+  name: "Tony", 
   email: "123@123.123", 
   password: "123123", 
   role: "admin", 
@@ -32,8 +32,8 @@ User.create(
   avatar: File.new(Rails.root.join('app', 'assets', 'images', photo)))
 
 User.create(
-  id: "1",
-  name:"Cococa",
+  id: 2,
+  name: "Cococa",
   email: "admin@example.com",
   password: "12345678",
   role: "admin",
