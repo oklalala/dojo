@@ -18,7 +18,7 @@ class PostsTest < ApplicationSystemTestCase
 
     fill_in 'Content', with: @post.content
     fill_in 'Photo', with: @post.photo
-    fill_in 'Replies Count', with: @post.replies_count
+    fill_in 'Comments Count', with: @post.comments_count
     fill_in 'Status', with: @post.status
     fill_in 'Title', with: @post.title
     fill_in 'Viewed Count', with: @post.viewed_count
@@ -35,7 +35,7 @@ class PostsTest < ApplicationSystemTestCase
 
     fill_in 'Content', with: @post.content
     fill_in 'Photo', with: @post.photo
-    fill_in 'Replies Count', with: @post.replies_count
+    fill_in 'Comments Count', with: @post.comments_count
     fill_in 'Status', with: @post.status
     fill_in 'Title', with: @post.title
     fill_in 'Viewed Count', with: @post.viewed_count

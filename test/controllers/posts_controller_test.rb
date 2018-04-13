@@ -19,7 +19,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should create post' do
     assert_difference('Post.count') do
-      post posts_url, params: { post: { content: @post.content, photo: @post.photo, replies_count: @post.replies_count, status: @post.status, title: @post.title, viewed_count: @post.viewed_count, who_can_see: @post.who_can_see } }
+      post posts_url, params: { post: { content: @post.content, photo: @post.photo, comments_count: @post.comments_count, status: @post.status, title: @post.title, viewed_count: @post.viewed_count, who_can_see: @post.who_can_see } }
     end
 
     assert_redirected_to post_url(Post.last)
@@ -36,7 +36,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update post' do
-    patch post_url(@post), params: { post: { content: @post.content, photo: @post.photo, replies_count: @post.replies_count, status: @post.status, title: @post.title, viewed_count: @post.viewed_count, who_can_see: @post.who_can_see } }
+    patch post_url(@post), params: { post: { content: @post.content, photo: @post.photo, comments_count: @post.comments_count, status: @post.status, title: @post.title, viewed_count: @post.viewed_count, who_can_see: @post.who_can_see } }
     assert_redirected_to post_url(@post)
   end
 

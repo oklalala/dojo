@@ -69,8 +69,10 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet,
+  # only allow the white list through.
   def post_params
-    params.require(:post).permit(:title, :content, :photo, :status, :replies_count, :viewed_count, :who_can_see)
+    params.require(:post).permit(:title, :content, :photo, :status,
+                                 :comments_count, :viewed_count, :who_can_see)
   end
 end

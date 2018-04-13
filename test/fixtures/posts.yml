@@ -5,7 +5,7 @@ one:
   content: MyText
   photo: MyString
   status: MyString
-  replies_count: 1
+  comments_count: 1
   viewed_count: 1
   who_can_see: MyString
 
@@ -14,6 +14,6 @@ two:
   content: MyText
   photo: MyString
   status: MyString
-  replies_count: 1
+  comments_count: 1
   viewed_count: 1
   who_can_see: MyString
