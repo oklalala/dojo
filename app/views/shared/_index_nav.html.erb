@@ -1,0 +1,12 @@
+<ul class="nav nav-tabs">
+  <li role="presentation" class=<%= active_class?(post_path) %>>
+    <%= link_to "My Post", post_path %></li>
+  <li role="presentation" class=<%= active_class?(comments_path) %>>
+    <%= link_to "My comment", comments_path %></li>
+  <li role="presentation" class=<%= active_class?(collects_path) %>>
+    <%= link_to "My collect", collects_path %></li>
+  <li role="presentation" class=<%= active_class?(draft_posts_path) %>>
+    <%= link_to "My Draft", draft_posts_path %></li>
+  <li role="presentation" class=<%= active_class?(users_path) %>>
+    <%= link_to "My Friend", users_path %></li>
+</ul>
