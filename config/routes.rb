@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users, only: %i[index edit update]
+    resources :categories
     root 'users#index'
   end
 end
