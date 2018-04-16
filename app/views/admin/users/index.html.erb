@@ -1,7 +1,7 @@
 <h1>後台</h1>
 
 <div>
-  <%#= link_to 'Categories', admin_tweets_path %>
+  <%= link_to 'Categories', admin_categories_path %>
   |
   <%= link_to 'Users', admin_users_path %>
 </div>
@@ -13,6 +13,7 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>Avatar</th>
           <th>Email</th>
           <th>Role</th>
         </tr>
@@ -22,6 +23,7 @@
         <% @users.each do |user| %>
           <tr>
             <td><%= user.name %></td>
+            <td><%= image_tag user.avatar.url %></td>
             <td><%= user.email %></td>
             <td><%= form_for [:admin, user] do |f| %>
               <%= f.select(:role, [['Admin', 'admin'], ['Normal', 'normal']]) %>
