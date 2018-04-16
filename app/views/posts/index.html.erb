@@ -21,7 +21,10 @@
       <tr>
         <td><%= post.title %></td>
         <td><%= post.content %></td>
-        <td><%= post.photo %></td>
+        <td><%= image_tag post.photo.url, class: "rounded-circle" %>
+          <%= puts post.photo %>
+          <%= puts post.photo.url %>
+        </td>
         <td><%= post.status %></td>
         <td><%= post.comments_count %></td>
         <td><%= post.viewed_count %></td>
