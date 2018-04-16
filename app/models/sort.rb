@@ -1,5 +1,5 @@
 # hahaha
 class Sort < ApplicationRecord
-  has_many :posts
-  has_many :categories
+  belongs_to :post
+  belongs_to :category
 end

@@ -7,7 +7,7 @@ class Post < ApplicationRecord
   belongs_to :user
 
   has_many :sorts, dependent: :destroy
-  has_many :sorted_categories, through: :sorts, source: :category
+  has_many :categories, through: :sorts
 
   has_many :collects, dependent: :destroy
   has_many :collected_users, through: :collects, source: :user
