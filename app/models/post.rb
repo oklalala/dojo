@@ -17,4 +17,12 @@ class Post < ApplicationRecord
   def collected?(user)
     collected_user.include?(user)
   end
+
+  def last_reply
+    if comments.last
+      comments.last.created_at
+    else
+      created_at
+    end
+  end
 end

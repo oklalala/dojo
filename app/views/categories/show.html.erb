@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Posts</h1>
+
+
+<div class="container">
+  <div class="row">
+    <ul class= "nav nav-pills">
+    <li role= "presentation"><%= link_to "All", root_path%></li>
+    <% @categories.each do |category| %>
+      <li role= "presentation" class= "<%= "active" if category == @category %>" ><%= link_to category.name, category_path(category) %></li>
+    <% end %>
+  </ul>
+  <br>
+
+  <%= render "shared/post_list", posts: @posts %>
+
+  </div>
+</div>

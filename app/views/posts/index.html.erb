@@ -2,41 +2,17 @@
 
 <h1>Posts</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th>Photo</th>
-      <th>Status</th>
-      <th>Comments count</th>
-      <th>Viewed count</th>
-      <th>Who can see</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= post.content %></td>
-        <td><%= image_tag post.photo.url, class: "rounded-circle" %>
-          <%= puts post.photo %>
-          <%= puts post.photo.url %>
-        </td>
-        <td><%= post.status %></td>
-        <td><%= post.comments_count %></td>
-        <td><%= post.viewed_count %></td>
-        <td><%= post.who_can_see %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="container">
+  <div class="row">
+    <ul class= "nav nav-pills">
+    <li role= "presentation" class= "active" ><%= link_to "All", root_path%></li>
+    <% @categories.each do |category| %>
+      <li role= "presentation"><%= link_to category.name, category_path(category)%></li>
     <% end %>
-  </tbody>
-</table>
+  </ul>
+  <br>
+    <%= render "shared/post_list", posts: @posts %>
+  </div>
 
-<br>
 
-<%= link_to 'New Post', new_post_path %>
