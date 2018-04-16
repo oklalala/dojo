@@ -4,9 +4,9 @@ namespace :dev do
     Rake::Task['dev:fake_user'].execute
     # Rake::Task['dev:fake_friendship'].execute
     Rake::Task['dev:fake_post'].execute
-    # Rake::Task['dev:fake_comment'].execute
+    Rake::Task['dev:fake_comment'].execute
     # Rake::Task['dev:fake_collect'].execute
-    # Rake::Task['dev:fake_sort'].execute
+    Rake::Task['dev:fake_sort'].execute
   end
 
   task fake_user: :environment do
@@ -45,6 +45,20 @@ namespace :dev do
     end
     puts "have created fake Posts"
     puts "now you have #{Post.count} posts data"
+  end
+
+  task fake_sort: :environment do
+    Sort.destroy_all
+    Post.all.each do |post|
+      categories = Category.all.sample(2)
+      rand(2).times do |i|
+        post.sorts.create!(
+          category_id: categories[i].id
+        )
+      end
+    end
+    puts 'have created fake sorts'
+    puts "now you have #{Sort.count} sorts data"
   end
 
   task fake_comment: :environment do
