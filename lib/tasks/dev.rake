@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :dev do
   task fake_all: :environment do
     Rake::Task['db:seed'].execute
@@ -19,10 +21,10 @@ namespace :dev do
         avatar: File.new(Rails.root.join('app', 'assets', 'images', avatar)),
         email: FFaker::Internet.email,
         intro: FFaker::Lorem.paragraph,
-        password: "123123"
+        password: '123123'
       )
     end
-    puts "have created fake users"
+    puts 'have created fake users'
     puts "now you have #{User.count} users data"
   end
 
@@ -43,7 +45,7 @@ namespace :dev do
         user_id: User.all.sample.id
       )
     end
-    puts "have created fake Posts"
+    puts 'have created fake Posts'
     puts "now you have #{Post.count} posts data"
   end
 
@@ -64,14 +66,14 @@ namespace :dev do
   task fake_comment: :environment do
     Comment.destroy_all
     Post.all.each do |post|
-      rand(6).times do |i|
+      rand(6).times do |_i|
         post.comments.create!(
           content: FFaker::Lorem.paragraph,
           user: User.all.sample
         )
       end
     end
-    puts "have created fake comments"
+    puts 'have created fake comments'
     puts "now you have #{Comment.count} comments data"
   end
 
@@ -89,37 +91,39 @@ namespace :dev do
       post.collects_count = Collect.where(post_id: post.id).count
       post.save
     end
-    puts "have created fake collects"
+    puts 'have created fake collects'
     puts "now you have #{collect.count} collects data"
   end
 
   task fake_followship: :environment do
     Followship.destroy_all
     User.all.each do |user|
-      rand_user = User.select{|x| x!=user}.sample(5)
+      rand_user = User.reject { |x| x == user }.sample(5)
       rand(5).times do |i|
         user.followships.create!(
-          user_id: user.id, 
-          following_id: rand_user[i].id)
+          user_id: user.id,
+          following_id: rand_user[i].id
+        )
       end
     end
-   
-    puts "have created fake followship"
+
+    puts 'have created fake followship'
     puts "now you have #{Followship.count} followships data"
   end
 
   task fake_friendship: :environment do
     Friendship.destroy_all
     User.all.each do |user|
-      rand_user = User.select{|x| x!=user}.sample(5)
+      rand_user = User.reject { |x| x == user }.sample(5)
       rand(5).times do |i|
         user.friendships.create!(
-          user_id: user.id, 
-          friend_id: rand_user[i].id)
+          user_id: user.id,
+          friend_id: rand_user[i].id
+        )
       end
     end
-   
-    puts "have created fake friendship"
+
+    puts 'have created fake friendship'
     puts "now you have #{Friendship.count} friendships data"
   end
 

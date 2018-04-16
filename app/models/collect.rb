@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # hahaha
 class Collect < ApplicationRecord
   # validates :collecting_id, uniqueness: { scope: :user_id }

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Admin
   # come on!
   class CategoriesController < ApplicationController
-    before_action :set_catogory, only: [:update, :destroy]
+    before_action :set_catogory, only: %i[update destroy]
 
     def index
       @categories = Category.page(params[:page]).per(10)
