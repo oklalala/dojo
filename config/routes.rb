@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   devise_for :users
+  resources :categories, only: :show
   resources :posts
   root 'posts#index'
 
