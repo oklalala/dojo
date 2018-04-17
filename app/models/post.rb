@@ -20,9 +20,9 @@ class Post < ApplicationRecord
 
   def last_reply
     if comments.last
-      comments.last.created_at
+      comments.last.created_at.strftime("%Y-%m-%d")
     else
-      created_at
+      created_at.strftime("%Y-%m-%d")
     end
   end
 end
