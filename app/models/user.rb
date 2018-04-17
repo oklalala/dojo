@@ -14,7 +14,9 @@ class User < ApplicationRecord
   validates :name, uniqueness: { case_sensitive: true,
                                  message: 'has already been taken' }
   has_many :posts, dependent: :destroy
+
   has_many :comments, dependent: :destroy
+  has_many :commented_post, through: :comments, source: :comments
 
   has_many :collects, dependent: :destroy
   has_many :collected_posts, through: :collects
