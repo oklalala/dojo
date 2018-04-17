@@ -8,8 +8,10 @@
       <%= user.intro %>
     </div>
     <div class="col-md-12 text-right">
-      <% if current_user %>
-        <%= link_to "follow", user_path(user), class: "btn btn-success" %>
+      <% if user == current_user %>
+        <%= link_to "Edit Profile", edit_user_path(user), class: "btn btn-success" %>
+      <% else %>
+        <%= link_to "Follow", user_path(user), class: "btn btn-success" %>
       <% end %>
     </div>
   </div>

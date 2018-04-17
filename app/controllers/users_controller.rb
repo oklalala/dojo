@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
+# @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show comment collect draft friend]
   def show
-    # @post = @user.posted
+    @posts = @user.posts.all
   end
 
   def comment; end
