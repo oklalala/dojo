@@ -70,7 +70,8 @@ gem 'carrierwave'
 
 gem 'ffaker'
 
-gem 'bootstrap-sass'
+gem 'bootstrap'
+gem 'sprockets-rails'
 gem 'bootstrap4-kaminari-views'
 gem 'jquery-rails'
 gem 'kaminari'
