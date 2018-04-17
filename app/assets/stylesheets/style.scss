@@ -1,0 +1,73 @@
+/*carousel*/
+.carousel-item{
+  text-align: center;
+}
+
+.carousel-item img{
+  width : 50%;
+}
+
+/*navbar*/
+nav {
+  border-bottom: 1px solid silver;
+}
+
+
+/*footer*/
+#footer {
+  margin-top: 100px;
+}
+
+#footer div p {
+  text-align: center;
+  color: gray;
+}
+
+/*content*/
+#content {
+  margin-top: 50px;
+}
+
+// avatar img
+.box{
+  min-height: 120px;
+  overflow: inline;
+  /*margin: 40px;*/
+  display: block;
+}
+
+.avatar-navi {
+  height: 40px;
+  width: 40px;
+  /*margin: 0px,80px,-40px,80px;*/
+  display: block;
+}
+
+.avatar-user{
+  width: 120px;
+  float: left;
+  margin: 0px 0px 10px 0px;
+  // display: block;
+}
+
+.avatar .avatar-navi .avatar-user img{
+  height: 100%;
+  width: 100%;
+  margin: auto;
+}
+
+/* Stackoverflow preview fix, please ignore */
+.navbar-nav {
+  flex-direction: row;
+}
+
+.nav-link {
+  padding-right: .5rem !important;
+  padding-left: .5rem !important;
+}
+
+/* Fixes dropdown menus placed on the right side */
+.ml-auto .dropdown-menu {
+  left: auto !important;
+  right: 0px;
+}
