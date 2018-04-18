@@ -4,16 +4,14 @@
 
 
 <div class="container">
-  <div class="row">
     <ul class= "nav nav-pills">
-    <li role= "presentation"><%= link_to "All", root_path%></li>
-    <% @categories.each do |category| %>
-      <li role= "presentation" class= "<%= "active" if category == @category %>" ><%= link_to category.name, category_path(category) %></li>
-    <% end %>
-  </ul>
+      <li role= "presentation" class= "nav-item"><%= link_to "All", root_path, class: "nav-link" %></li>
+      <% @categories.each do |category| %>
+        <li role= "presentation" class= "nav-item" ><%= link_to category.name, category_path(category), class: "nav-link #{"active" if category == @category}" %></li>
+      <% end %>
+    </ul>
   <br>
-
-  <%= render "shared/post_list", posts: @posts %>
-
+  <div class="row">
+    <%= render "shared/post_list", posts: @posts %>
   </div>
 </div>
