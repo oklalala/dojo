@@ -1,4 +1,33 @@
 <%= render "shared/user_profile", user: current_user %>
 <%= render "shared/index_nav", user: @user %>
 
-<p>Comment.html.erb</p>
+<table>
+  <!-- <thead>
+    <tr>
+      <th>Title</th>
+      <th>status</th>
+      <th>Created at</th>
+      <th>edit and destroy</th>
+    </tr>
+  </thead> -->
+
+  <tbody>
+    <% @commented_posts.each do |post| %>
+      <%= link_to post.title, post_path(post) %>
+      <%# post.comments.each do |comment| %>
+        <%# if comment == current_user.comment %>
+          <%#= comment.content %>
+        <%# else %>
+          <%#= %>
+      <tr>
+        <td></td>
+        <td><%= "publish" %></td>
+        <td><%#= link_to 'edit', edit_comment_path(comment) %></td>
+        <td><%#= link_to 'destroy', comment_path(comment), method: :delete, data:{ confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
