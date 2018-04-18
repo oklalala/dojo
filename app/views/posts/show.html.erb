@@ -1,39 +1,57 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+<li><%= @post.title %><%= link_to "collect" %><%= "comment" %></li>
+<div class="row">
+  <div class="col-md-2">
+    <%= image_tag @post.user.avatar.url %>
+    <%= @post.user.name %>
+    <%= "Add Friend" %>
+  </div>
+  <div class="col-md-8 offset-md-1">
+    <div class="col-md-12">
+      <%= image_tag @post.photo.url %>
+    </div>
+    <div class="col-md-12">
+      <%= @post.content %>
+    </div>
+    <div class="text-right">
+      <%= link_to "edit", edit_post_path(@post) %>
+      <%= link_to "destroy", post_path(@post), method: :delete, data:{ confirm: "Are you sure?" } %>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Content:</strong>
-  <%= @post.content %>
-</p>
+<% @comments.each do |comment| %>
+    <div class= "box-border">
+      <div class="avatar">
+        <%= image_tag comment.user.avatar.url, class: "img-float rounded" %>
+      </div>
+      <h4><%= link_to "@#{comment.user.name}, #{comment.created_at.strftime("%Y-%m-%d, %H:%M")}", comment_user_path(comment.user) %></h4>
+      <h4><%= comment.content %></h4>
+      <!-- 使用者能回覆別人的推播 -->
+      <h4><%#= link_to "Reply(#{comment.replies.count})", comment_replies_path(comment) %>
+        <%#= render "shared/like", :comment => comment %></h4>
+    </div>
+    <div class="clearfix"></div>
+    <br />
 
-<p>
-  <strong>Photo:</strong>
-  <%= image_tag @post.photo.url %>
-</p>
+    <% end %>
 
-<p>
-  <strong>Status:</strong>
-  <%= @post.status %>
-</p>
+<%#= render partial: "shared/comments" %>
 
-<p>
-  <strong>Comments count:</strong>
-  <%= @post.comments_count %>
-</p>
-
-<p>
-  <strong>Viewed count:</strong>
-  <%= @post.viewed_count %>
-</p>
-
-<p>
-  <strong>Who can see:</strong>
-  <%= @post.who_can_see %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<!-- 使用者能新增推播（限制在 140 字裡） -->
+    <div class="form-horizontal">
+      <%= form_for @comment, url: new_comment_path do |f| %>
+      <div class="form-group">
+        <%= f.text_area :content, size: "60x12", placeholder: "What's on your mind?", class: "radius form-control" %>
+      </div>
+      <div class="col-sm-6">
+        <% if @comment.errors.any? %>
+          <%= @comment.errors.full_messages.to_sentence %>
+        <% end %>
+      </div>
+        <div class="col-sm-offset-11 col-md-2">
+          <%= f.submit "comment", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
