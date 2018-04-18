@@ -1,11 +1,21 @@
-<p id="notice"><%= notice %></p>
 
-<li><%= @post.title %><%= link_to "collect" %><%= "comment" %></li>
+<nav class="navbar navbar-light bg-light justify-content-between">
+  <%= link_to @post.title, post_path(@post), class: "navbar-brand" %>
+  <form class="form-inline">
+    <%= link_to "collect", post_path(@post), class: "btn btn-outline-secondary m-2 my-sm-0" %>
+    <%= link_to "comment", post_path(@post), class: "btn btn-outline-secondary my-2 my-sm-0" %>
+  </form>
+</nav>
 <div class="row">
   <div class="col-md-2">
-    <%= image_tag @post.user.avatar.url %>
-    <%= @post.user.name %>
-    <%= "Add Friend" %>
+    <div class="card" style="width: 18rem;">
+      <%= image_tag @post.user.avatar.url, class: "card-img-top" %>
+      <div class="card-body align-center">
+        <h5 class="card-title text-center"><%= @post.user.name %></h5>
+        <%= link_to "Add Friend", posts_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+    
   </div>
   <div class="col-md-8 offset-md-1">
     <div class="col-md-12">
@@ -40,18 +50,18 @@
 <%#= render partial: "shared/comments" %>
 
 <!-- 使用者能新增推播（限制在 140 字裡） -->
-    <div class="form-horizontal">
-      <%= form_for @comment, url: new_comment_path do |f| %>
-      <div class="form-group">
-        <%= f.text_area :content, size: "60x12", placeholder: "What's on your mind?", class: "radius form-control" %>
-      </div>
-      <div class="col-sm-6">
-        <% if @comment.errors.any? %>
-          <%= @comment.errors.full_messages.to_sentence %>
-        <% end %>
-      </div>
-        <div class="col-sm-offset-11 col-md-2">
-          <%= f.submit "comment", class: "btn btn-primary" %>
-        </div>
-      <% end %>
+<div class="form-horizontal">
+  <%= form_for @comment, url: new_comment_path do |f| %>
+  <div class="form-group offset-md-1 col-md-10">
+    <%= f.text_area :content, size: "60x12", placeholder: "What's on your mind?", class: "rounded form-control" %>
+  </div>
+  <div class="col-sm-6">
+    <% if @comment.errors.any? %>
+      <%= @comment.errors.full_messages.to_sentence %>
+    <% end %>
+  </div>
+    <div class="col-md-11 text-right">
+      <%= f.submit "comment", class: "btn btn-primary" %>
     </div>
+  <% end %>
+</div>
