@@ -3,15 +3,15 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :categories, only: :show
-  resources :posts
-  root 'posts#index'
-  resources :comment
-  resources :users do
+  resources :posts do
     collection do
       get :feeds
       get :ranking
     end
-
+  end
+  root 'posts#index'
+  resources :comment
+  resources :users do
     member do
       get :post
       get :comment
