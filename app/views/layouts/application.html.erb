@@ -17,10 +17,21 @@
       <% end %>
       <a class="navbar-brand" href="<%= root_path %>">Dojo Forum</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon">
-          
-        </span>
+        <span class="navbar-toggler-icon"></span>
       </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <%= link_to "Feed", feeds_posts_path, class: "nav-link"%>
+          </li>
+          <li class="nav-item">
+            <%= link_to "All Post", root_path, class: "nav-link"%>
+          </li>
+          <li class="nav-item">
+            <%= link_to "New Post", new_post_path, class: "nav-link"%>
+          </li>
+        </ul>
+      </div>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
