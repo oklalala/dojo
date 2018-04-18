@@ -1,5 +1,23 @@
 # README
 
+* bundle install
+
+* rails db:migrate
+
+* rails db:seed
+
+* rails dev:fake_all
+
+Admin 
+account: admin@example.com
+password: 12345678
+
+or
+
+account: 123@123.123
+password: 123123
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
