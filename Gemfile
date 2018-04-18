@@ -71,9 +71,11 @@ gem 'carrierwave'
 gem 'ffaker'
 
 gem 'bootstrap'
-gem 'sprockets-rails'
-gem 'bootstrap4-kaminari-views'
+gem 'font-awesome-rails' # add icon with bootstrap
 gem 'jquery-rails'
+gem 'sprockets-rails'
+
+gem 'bootstrap4-kaminari-views'
 gem 'kaminari'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
