@@ -25,4 +25,8 @@ class Post < ApplicationRecord
       created_at.strftime("%Y-%m-%d")
     end
   end
+
+  def photo?
+    !photo.url.empty?
+  end
 end
