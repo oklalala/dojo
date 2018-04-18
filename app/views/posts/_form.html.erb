@@ -22,7 +22,9 @@
   </div>
 
   <div class="field">
-    <%= image_tag @post.photo.url %>
+    <% unless post.new_record? %>
+      <%= image_tag post.photo.url %>
+    <% end %>
     <%= form.file_field :photo %>
   </div>
 
