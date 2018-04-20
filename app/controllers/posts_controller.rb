@@ -3,61 +3,45 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
   before_action :set_post, only: %i[show edit update destroy]
-
-  # GET /posts
-  # GET /posts.json
   def index
     @posts = Post.page(params[:page]).per(10)
     @categories = Category.all
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
   def show
     @comments = @post.comments
     @comment = Comment.new
   end
 
-  # GET /posts/new
   def new
     @post = Post.new
   end
 
-  # GET /posts/1/edit
   def edit; end
 
-  # POST /posts
-  # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.user_id = current_user.id
+    set_post_status
 
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    if @post.save
+      post_redirect(@post)
+    else
+      render :new
+      flash[:alert] = "#{@post.title} was failed to create"
     end
   end
 
-  # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    set_post_status
+    if @post.update(post_params)
+      post_redirect(@post)
+    else
+      render :edit
+      flash[:alert] = "#{@post.title} was failed to update"
     end
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.json
   def destroy
     @post.destroy
     respond_to do |format|
@@ -75,10 +59,41 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def set_sort
+    @sort = Sort.find(params[:id])
+  end
+
   # Never trust parameters from the scary internet,
   # only allow the white list through.
   def post_params
     params.require(:post).permit(:title, :content, :photo, :status,
                                  :comments_count, :viewed_count, :who_can_see)
+  end
+
+  def post_redirect(post)
+    if post.publish?
+      redirect_to post_path(post)
+    else
+      redirect_to draft_user_path(post.user_id)
+    end
+    flash[:notice] = "#{@post.title} was successfully updated"
+  end
+
+  def set_post_status
+    @post.status = 'draft' if drafting?
+    @post.status = 'publish' if publishing?
+    @post.status = nil if unpublishing?
+  end
+
+  def publishing?
+    params[:commit] == 'Publish'
+  end
+
+  def unpublishing?
+    params[:commit] == 'Unpublish'
+  end
+
+  def drafting?
+    params[:commit] == 'Draft'
   end
 end

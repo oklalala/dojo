@@ -20,13 +20,27 @@ class Post < ApplicationRecord
 
   def last_reply
     if comments.last
-      comments.last.created_at.strftime("%Y-%m-%d")
+      comments.last.created_at.strftime('%Y-%m-%d')
     else
-      created_at.strftime("%Y-%m-%d")
+      created_at.strftime('%Y-%m-%d')
     end
   end
 
   def photo?
-    !photo.url.empty?
+    !photo.url.empty? unless photo.url.nil?
+    nil
+  end
+
+  def set_draft
+    self.status = 'draft'
+    save
+  end
+
+  def publish?
+    status == 'publish'
+  end
+
+  def draft?
+    status == 'draft'
   end
 end
