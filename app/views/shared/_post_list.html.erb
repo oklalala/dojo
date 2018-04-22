@@ -18,7 +18,7 @@
           <span class= "badge badge-secondary"><%= post.comments_count %></span></td>
         <td><%= link_to post.title, post_path(post) %></td>
         <td><%= post.last_reply %></td>
-        <td><%= fa_icon "eye" %> <%= post.viewed_count %></td>
+        <td><%= icon 'fa','eye' %> <%= post.viewed_count %></td>
       </tr>
     <% end %>
   </tbody>
