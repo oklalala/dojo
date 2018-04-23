@@ -1,0 +1,8 @@
+<div class="text-right">
+  <% if comment.user == current_user %>
+    <%= link_to "edit", edit_post_comment_path(comment), class: "btn btn-secondary" %>
+    <%= link_to "destroy", post_comment_path(comment), method: :delete, data:{ confirm: "Are you sure?" }, class: "btn btn-secondary" %>
+  <% elsif current_user.role == 'admin' %>
+    <%= link_to "destroy", post_comment_path(comment), method: :delete, data:{ confirm: "Are you sure?" }, class: "btn btn-secondary" %>
+  <% end %>
+</div>
