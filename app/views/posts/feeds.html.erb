@@ -1,1 +1,21 @@
-<p>Feed posts</p>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 offset-md-1">
+        <h1 class="text-center">User</h1>
+        <%= User.count %>
+      </div>
+      <div class="col-md-4">
+        <h1 class="text-center">Post</h1>
+        <%= Post.count %>
+      </div>
+      <div class="col-md-3">
+        <h1 class="text-center">Comment</h1>
+        <h3 class="align-items-center badge badge-secondary"><%= Comment.count %></h3>  
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
