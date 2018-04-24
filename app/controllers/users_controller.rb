@@ -8,12 +8,15 @@ class UsersController < ApplicationController
   end
 
   def comment
+    @comments = @user.comments.all
     @commented_posts = @user.commented_posts.all
   end
 
   def collect; end
 
-  def draft; end
+  def draft
+    @posts = @user.posts.where(status: 'draft')
+  end
 
   def friend; end
 
