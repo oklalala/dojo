@@ -4,13 +4,13 @@ Rails.application.routes.draw do
   devise_for :users
   resources :categories, only: :show
   resources :posts do
+    resources :comments, only: %i[create edit update destroy]
     collection do
       get :feeds
       get :ranking
     end
   end
   root 'posts#index'
-  resources :comment
   resources :users do
     member do
       get :post
