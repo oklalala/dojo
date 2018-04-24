@@ -17,7 +17,9 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-  def edit; end
+  def edit
+    @categories = Category.all
+  end
 
   def create
     @post = Post.new(post_params)
@@ -67,7 +69,8 @@ class PostsController < ApplicationController
   # only allow the white list through.
   def post_params
     params.require(:post).permit(:title, :content, :photo, :status,
-                                 :comments_count, :viewed_count, :who_can_see)
+                                 :comments_count, :viewed_count, :who_can_see,
+                                 category_ids: [])
   end
 
   def post_redirect(post)
