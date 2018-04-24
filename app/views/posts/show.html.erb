@@ -8,25 +8,25 @@
 </nav>
 
 <!-- post and user -->
-<%= render "shared/post_user", comment: @post %>
+<%= render "shared/post_user", comment: @post, path: 'post' %>
 
 <!-- comment and user -->
 <% @comments.each do |comment| %>
-  <%= render "shared/post_user", comment: comment %>
+  <%= render "shared/post_user", comment: comment, path: 'comment_post' %>
 <% end %>
 <br>
 
-<!-- 使用者能新增推播（限制在 140 字裡） -->
+<!-- post new comment -->
 <div class="form-horizontal">
-  <%= form_for @comment, url: new_comment_path do |f| %>
-  <div class="form-group offset-md-1 col-md-10">
-    <%= f.text_area :content, size: "60x12", placeholder: "What's on your mind?", class: "rounded form-control" %>
-  </div>
-  <div class="col-sm-6">
-    <% if @comment.errors.any? %>
-      <%= @comment.errors.full_messages.to_sentence %>
-    <% end %>
-  </div>
+  <%= form_for [@post,@comment] do |f| %>
+    <div class="form-group offset-md-1 col-md-10">
+      <%= f.text_area :content, size: "60x12", placeholder: "What's on your mind?", class: "rounded form-control" %>
+    </div>
+    <div class="col-sm-6">
+      <% if @comment.errors.any? %>
+        <%= @comment.errors.full_messages.to_sentence %>
+      <% end %>
+    </div>
     <div class="col-md-11 text-right">
       <%= f.submit "comment", class: "btn btn-primary" %>
     </div>
