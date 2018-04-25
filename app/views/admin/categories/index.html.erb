@@ -6,17 +6,19 @@
   <%= link_to 'Users', admin_users_path %>
 </div>
 
-<div class="form-inline" >
-    <%= form_for [:admin, @category] do |f| %>
-      <div class="form-group">
-        <%= f.text_field :name, placeholder: "Category Name",  class: "form-control" %>
-      </div>
-      <%= f.submit class: "btn btn-primary" %>
-      <% if @category.errors.any? %>
-        <%= @category.errors.full_messages.to_sentence %>
-      <% end %>
+<%= form_for [:admin, @category], html: {class: 'form-inline'} do |f| %>
+  <div class="form-group mb-2">
+    <%= f.text_field :name, placeholder: "Category Name", class: "form-control" %>
+  </div>
+  <div class="form-group mx-sm-3 mb-2">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+  <div class="form-group">
+    <% if @category.errors.any? %>
+      <%= @category.errors.full_messages.to_sentence %>
     <% end %>
   </div>
+<% end %>
   <br>
 
   <div class="row">
@@ -36,8 +38,19 @@
           <tr>
             <th scope="row"><%= category.id %></th>
             <td><%= category.name %></td>
-            <span><td><%= link_to "",admin_categories_path(id: category.id),class: "glyphicon glyphicon-wrench" %>
-               | <%= link_to "",admin_category_path(category), method: :delete, data: {confirm: "Are you sure?"}, class: "glyphicon glyphicon-trash" %></td></span>
+            <span>
+              <td>
+                <%= link_to admin_categories_path(id: category.id) do%>
+                  <%= icon 'far', 'edit' %>
+                <% end %>
+                <% unless category.sorted? %>
+                  | 
+                  <%= link_to admin_category_path(category), method: :delete, data: {confirm: "Are you sure?"} do %>
+                    <%= icon 'far', 'trash-alt' %>
+                  <% end %>
+                <% end %>
+               </td>
+             </span>
           </tr>
           <% end %>
         </tbody>

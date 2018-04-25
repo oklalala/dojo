@@ -3,12 +3,12 @@
 module Admin
   # come on!
   class CategoriesController < ApplicationController
-    before_action :set_catogory, only: %i[update destroy]
+    before_action :set_category, only: %i[update destroy]
 
     def index
       @categories = Category.page(params[:page]).per(10)
       if params[:id]
-        set_catogory
+        set_category
       else
         @category = Category.new
       end
@@ -48,7 +48,7 @@ module Admin
       params.require(:category).permit(:name)
     end
 
-    def set_catogory
+    def set_category
       @category = Category.find(params[:id])
     end
   end
