@@ -4,6 +4,9 @@
 class Post < ApplicationRecord
   mount_uploader :photo, PhotoUploader
 
+  is_impressionable counter_cache: true, column_name: :viewed_count
+  # save count of view the post.
+
   belongs_to :user
 
   has_many :sorts, dependent: :destroy
@@ -13,6 +16,10 @@ class Post < ApplicationRecord
   has_many :collected_users, through: :collects, source: :user
 
   has_many :comments, dependent: :destroy
+
+  def replies_count
+    comments.count
+  end
 
   def collected?(user)
     collected_user.include?(user)

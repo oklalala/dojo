@@ -1,20 +1,24 @@
 # frozen_string_literal: true
 
+# hahaha
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
   before_action :set_post, only: %i[show edit update destroy]
+  impressionist action: %i[show index]
   def index
     @posts = Post.page(params[:page]).per(10)
     @categories = Category.all
   end
 
   def show
+    impressionist(@post, 'message???')
     @comments = @post.comments
     @comment = Comment.new
   end
 
   def new
     @post = Post.new
+    @categories = Category.all
   end
 
   def edit
