@@ -36,4 +36,16 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
+
+  def friend?
+    following? && followships.accept
+  end
+
+  def was_ignored?
+    following? && !followship.accept
+  end
+
+  def collecting?(post)
+    collected_posts.include?(post)
+  end
 end
