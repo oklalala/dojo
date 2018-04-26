@@ -9,7 +9,6 @@ class UsersController < ApplicationController
 
   def comment
     @comments = @user.comments.all
-    @commented_posts = @user.commented_posts.all
   end
 
   def collect; end
