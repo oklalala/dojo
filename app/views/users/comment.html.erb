@@ -2,28 +2,18 @@
 <%= render "shared/index_nav", user: @user %>
 
 <table class= "table table-secondary table-hover">
-  <!-- <thead>
-    <tr>
-      <th>Title</th>
-      <th>status</th>
-      <th>Created at</th>
-      <th>edit and destroy</th>
-    </tr>
-  </thead> -->
-
   <tbody>
-    <% @commented_posts.each do |post| %>
-      <%= link_to post.title, post_path(post) %>
-      <%# post.comments.each do |comment| %>
-        <%# if comment == current_user.comment %>
-          <%#= comment.content %>
-        <%# else %>
-          <%#= %>
-      <tr>
-        <td></td>
-        <td><%= "publish" %></td>
-        <td><%#= link_to 'edit', edit_comment_path(comment) %></td>
-        <td><%#= link_to 'destroy', comment_path(comment), method: :delete, data:{ confirm: "Are you sure?" } %></td>
+    <% @comments.each do |comment| %>
+      <tr id='comment-<%= comment.id %>' class='row'>
+        <td class="col-md-10 offset-md-2">
+          <%= link_to comment.post.title, post_path(comment.post) %>
+        </td>
+        <td class="col-md-6 offset-md-2">
+          <p id="comment-title-<%= comment.id %>" class="title my-font">
+            <%= comment.content %>
+          </p>
+        </td>
+        <td class='my-operation col-md-1'><%= render 'shared/edit_comment', comment: comment %></td>
       </tr>
     <% end %>
   </tbody>

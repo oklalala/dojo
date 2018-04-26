@@ -1,6 +1,6 @@
 # rubocop
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[edit update destroy]
+  # before_action :set_comment, only: %i[update destroy]
 
   def new
     @comment = Comment.new
@@ -20,24 +20,21 @@ class CommentsController < ApplicationController
     redirect_to post_path(@post)
   end
 
-  def edit; end
+  def edit
+    @user = User.find(params[:id])
+    @comment = @user.comments.find(params[:user_id])
+  end
 
   def update
-    if @comment.update(post_params)
-      redirect_to post_path(@comment.post)
-      flash[:notice] = "#{@comment.post.title} was successfully updated"
-    else
-      render :edit
-      flash[:alert] = "#{@comment.post.title} was failed to update"
-    end
+    @user = User.find(params[:user_id])
+    @comment = @user.comments.find(params[:id])
+    @comment.update_attributes(comment_params)
   end
 
   def destroy
+    @user = User.find(params[:id])
+    @comment = @user.comments.find(params[:user_id])
     @comment.destroy
-    respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Comment was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   private

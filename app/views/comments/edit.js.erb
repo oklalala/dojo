@@ -1,0 +1,3 @@
+<% html = j( render :partial => "form", :locals => { :comment => @comment } ) %>
+var comment_tds = $("#comment-<%= @comment.id %>").children();
+$(comment_tds[1]).html("<%= html %>");

@@ -1,8 +1,14 @@
 <div class="text-right">
   <% if comment.user == current_user %>
-    <%= link_to "edit", edit_post_comment_path(comment), class: "btn btn-secondary" %>
-    <%= link_to "destroy", post_comment_path(comment), method: :delete, data:{ confirm: "Are you sure?" }, class: "btn btn-secondary" %>
+    <%= link_to edit_user_comment_path(comment), :remote => true do %>
+      <%= icon 'far', 'edit' %>
+    <% end %>
+    <%= link_to user_comment_path(comment), method: :delete, data:{ confirm: "Are you sure?" }, :remote => true do %>
+      <%= icon 'far', 'trash-alt' %>
+    <% end %>
   <% elsif current_user.role == 'admin' %>
-    <%= link_to "destroy", post_comment_path(comment), method: :delete, data:{ confirm: "Are you sure?" }, class: "btn btn-secondary" %>
+    <%= link_to user_comment_path(comment), method: :delete, data:{ confirm: "Are you sure?" }, :remote => true do %>
+      <%= icon 'far', 'trash-alt' %>
+    <% end %>
   <% end %>
 </div>

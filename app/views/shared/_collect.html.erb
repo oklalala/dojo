@@ -1,0 +1,15 @@
+<!-- 此頁是user要追蹤/取消追蹤Post的按鈕 -->
+
+<% if current_user %>
+  <div id="<%= post.id %>">
+    <% if !current_user.collecting?(post) %>
+      <button type="button" class="follow-a follow-post btn btn-warning btn-sm">Collect</button>
+    <% else %>
+      <button type="button" class="unfollow-a follow-post btn btn-outline-warning btn-sm">Uncollect</button>
+    <% end %>
+  </div>
+<% else %>
+  <%= link_to new_user_session_path do  %>
+    <button type="button" class="follow-post btn btn-warning btn-sm">collect</button>
+  <% end %>
+<% end %>
