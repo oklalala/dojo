@@ -59,6 +59,19 @@ class PostsController < ApplicationController
     @users = User.order(comment_count: :desc).limit(10)
   end
 
+  def collect
+    @post = Post.find(params[:id])
+    Collects.create!(post: @post, user: current_user)
+    redirect_back(fallback_location: root_path)
+  end
+
+  def uncollect
+    @post = Post.find(params[:id])
+    collects = Favorite.where(post: @post, user: current_user)
+    collects.destroy_all
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
