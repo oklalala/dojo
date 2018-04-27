@@ -11,7 +11,9 @@ class UsersController < ApplicationController
     @comments = @user.comments.all
   end
 
-  def collect; end
+  def collect
+    @collected_posts = @user.collected_posts.all
+  end
 
   def draft
     @posts = @user.posts.where(status: 'draft')

@@ -1,4 +1,14 @@
 <%= render "shared/user_profile", user: @user %>
 <%= render "shared/index_nav", user: @user %>
 
-<p>collect.html.erb</p>
+<table class= "table table-secondary table-hover">
+  <tbody>
+    <% @collected_posts.each do |post| %>
+      <tr>
+        <td><%= link_to post.title, post_path(post), style: 'color:green' %></td>
+        <td><%= render "shared/collect", post: post %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
