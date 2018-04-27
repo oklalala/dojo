@@ -7,7 +7,6 @@ Rails.application.routes.draw do
     resources :comments, only: %i[create edit update destroy]
     collection do
       get :feeds
-      get :ranking
     end
     member do
       post :collect
