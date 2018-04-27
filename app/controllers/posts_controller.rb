@@ -54,7 +54,10 @@ class PostsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
-  def feeds; end
+  def feeds
+    @posts = Post.order(comment_count: :desc).limit(10)
+    @users = User.order(comment_count: :desc).limit(10)
+  end
 
   private
 
