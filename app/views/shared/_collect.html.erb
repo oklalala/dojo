@@ -1,15 +1,49 @@
-<!-- 此頁是user要追蹤/取消追蹤Post的按鈕 -->
+<!-- 此頁是user要追蹤/取消追蹤post的按鈕 -->
 
-<% if current_user %>
-  <div id="<%= post.id %>">
-    <% if !current_user.collecting?(post) %>
-      <button type="button" class="follow-a follow-post btn btn-warning btn-sm">Collect</button>
-    <% else %>
-      <button type="button" class="unfollow-a follow-post btn btn-outline-warning btn-sm">Uncollect</button>
-    <% end %>
-  </div>
+<% if post.collected?(current_user) %>
+  <%= link_to 'Uncollect', uncollect_post_path(post), method: :post, class: "btn btn-info" %>
 <% else %>
-  <%= link_to new_user_session_path do  %>
-    <button type="button" class="follow-post btn btn-warning btn-sm">collect</button>
-  <% end %>
+  <%= link_to 'Collect', collect_post_path(post), method: :post, class: "btn btn-primary" %>
 <% end %>
+
+<!-- <div class="collect-box">
+  <div id="<%= post.id %>">
+    <%# if !current_user.collecting?(post) %>
+      <button type="button" class="collect-a collect-post btn btn-warning btn-sm">collect</button>
+    <%# else %>
+      <button type="button" class="uncollect-a collect-post btn btn-outline-warning btn-sm">Uncollect</button>
+    <%# end %>
+  </div>
+</div>
+
+<script>
+  $('.collect-box').on("click", ".uncollect-a", function(post) {
+    var id = post.target.parentNode.id;
+    $.ajax({
+      url: "/posts/" + id + "/uncollect",
+      method: "POST",
+      dataType: "json",
+      success: function(data) {
+        $('#'+data["id"]).html($('#post-collect-template').html());
+      }
+    });
+  });
+  
+  $('.collect-box').on("click", ".uncollect-a", function(post) {
+    var id = post.target.parentNode.id;
+    $.ajax({
+      url: "/posts/" + id + "/uncollect",
+      method: "POST",
+      dataType: "json",
+      success: function(data) {
+        $('#'+data["id"]).html($('#post-collect-template').html());
+      }
+    });
+  });
+</script>
+<script type="text/template" id="post-collect-template">
+  <button type="button" class="collect-a collect-post btn btn-warning btn-sm">Collect</button>
+</script>
+<script type="text/template" id="post-uncollect-template">
+  <button type="button" class="uncollect-a collect-post btn btn-outline-warning btn-sm">Uncollect</button>
+</script> -->
