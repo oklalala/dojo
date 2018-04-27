@@ -23,7 +23,7 @@ class Post < ApplicationRecord
   end
 
   def collected?(user)
-    collected_user.include?(user)
+    collected_users.include?(user)
   end
 
   def last_reply
