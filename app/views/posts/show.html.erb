@@ -2,8 +2,8 @@
 <nav class="navbar navbar-light bg-light justify-content-between">
   <%= link_to @post.title, post_path(@post), class: "navbar-brand" %>
   <form class="form-inline">
-    <%= link_to "collect", post_path(@post), class: "btn btn-outline-secondary m-2 my-sm-0" %>
-    <%= link_to "comment", post_path(@post), class: "btn btn-outline-secondary my-2 my-sm-0" %>
+    <%= render 'shared/collect', post: @post %>
+    <%= link_to "comment", post_path(@post), class: "btn btn-outline-secondary m-2 my-sm-0" %>
   </form>
 </nav>
 
