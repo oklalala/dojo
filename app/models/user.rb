@@ -15,7 +15,7 @@ class User < ApplicationRecord
                                  message: 'has already been taken' }
   has_many :posts, dependent: :destroy
 
-  has_many :comments, dependent: :destroy
+  has_many :comments, dependent: :destroy, counter_cache: true
   has_many :commented_posts, through: :comments, source: :post
 
   has_many :collects, dependent: :destroy
