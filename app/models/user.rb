@@ -19,7 +19,7 @@ class User < ApplicationRecord
   has_many :commented_posts, through: :comments, source: :post
 
   has_many :collects, dependent: :destroy
-  has_many :collected_posts, through: :collects
+  has_many :collected_posts, through: :collects, source: :post
 
   # Following Follower
   has_many :followships, dependent: :destroy
