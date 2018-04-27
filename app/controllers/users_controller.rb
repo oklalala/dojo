@@ -2,7 +2,7 @@
 
 # @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show comment collect draft friend]
+  before_action :set_user, only: %i[edit update show comment collect draft friend]
   def show
     @posts = @user.posts.all
   end
@@ -18,6 +18,17 @@ class UsersController < ApplicationController
   end
 
   def friend; end
+
+  def edit; end
+
+  def update
+    if @user.update(user_params)
+      redirect_to user_path(@user)
+    else
+      render :edit
+      flash[:alert] = "#{@user.name} was failed to update"
+    end
+  end
 
   private
 
