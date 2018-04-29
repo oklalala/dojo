@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # rubocop
 class CommentsController < ApplicationController
   # before_action :set_comment, only: %i[update destroy]

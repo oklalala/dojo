@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # friendship
 class Friendship < ApplicationRecord
   belongs_to :user
