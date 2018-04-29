@@ -3,5 +3,5 @@
 # friendship
 class Friendship < ApplicationRecord
   belongs_to :user
-  belongs_to :post, optional: true
+  belongs_to :friend, class_name: 'User'
 end
