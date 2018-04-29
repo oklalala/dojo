@@ -66,7 +66,7 @@ namespace :dev do
   task fake_comment: :environment do
     Comment.destroy_all
     Post.all.each do |post|
-      rand(6).times do |_i|
+      rand(6).times do
         post.comments.create!(
           content: FFaker::Lorem.paragraph,
           user: User.all.sample
@@ -98,7 +98,7 @@ namespace :dev do
   task fake_friendship: :environment do
     Friendship.destroy_all
     User.all.each do |user|
-      rand_user = User.reject { |x| x == user }.sample(5)
+      rand_user = User.select { |x| x != user }.sample(5)
       rand(5).times do |i|
         user.friendships.create!(
           user_id: user.id,
