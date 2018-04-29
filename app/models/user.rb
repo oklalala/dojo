@@ -10,7 +10,7 @@ class User < ApplicationRecord
   mount_uploader :avatar, PhotoUploader
   # user name can't be the same or pop out the error.
   validates_presence_of :name
-  # can't_follow_yourself
+  # can't_friend_yourself
   validates :name, uniqueness: { case_sensitive: true,
                                  message: 'has already been taken' }
   has_many :posts, dependent: :destroy
@@ -21,28 +21,27 @@ class User < ApplicationRecord
   has_many :collects, dependent: :destroy
   has_many :collected_posts, through: :collects, source: :post
 
-  # Following Follower
-  has_many :followships, dependent: :destroy
-  has_many :followings, through: :followships
-
-  has_many :inverse_followships, class_name: 'Followship',
+  # friendship
+  has_many :friendships, dependent: :destroy
+  has_many :friends, through: :friendships, source: :user
+  has_many :inverse_friendships, class_name: 'Friendship',
                                  foreign_key: 'friend_id'
-  has_many :followers, through: :inverse_followships, source: :user
+  has_many :require_friends, through: :inverse_friendships, source: :user
 
   def admin?
     role == 'admin'
   end
 
-  def following?(user)
-    followings.include?(user)
+  def friending?(user)
+    friendings.include?(user)
   end
 
   def friend?
-    following? && followships.accept
+    friending? && friendships.accept
   end
 
   def was_ignored?
-    following? && !followship.accept
+    friending? && !friendship.accept
   end
 
   def collecting?(post)

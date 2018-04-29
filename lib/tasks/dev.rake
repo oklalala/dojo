@@ -95,22 +95,6 @@ namespace :dev do
     puts "now you have #{collect.count} collects data"
   end
 
-  task fake_followship: :environment do
-    Followship.destroy_all
-    User.all.each do |user|
-      rand_user = User.reject { |x| x == user }.sample(5)
-      rand(5).times do |i|
-        user.followships.create!(
-          user_id: user.id,
-          following_id: rand_user[i].id
-        )
-      end
-    end
-
-    puts 'have created fake followship'
-    puts "now you have #{Followship.count} followships data"
-  end
-
   task fake_friendship: :environment do
     Friendship.destroy_all
     User.all.each do |user|
@@ -118,7 +102,8 @@ namespace :dev do
       rand(5).times do |i|
         user.friendships.create!(
           user_id: user.id,
-          friend_id: rand_user[i].id
+          friend_id: rand_user[i].id,
+          accept: [true, false].sample
         )
       end
     end
