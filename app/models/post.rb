@@ -9,6 +9,10 @@ class Post < ApplicationRecord
 
   belongs_to :user
 
+  scope :all_can_see, where(who_can_see: %w[all])
+  scope :friend_can_see, where(who_can_see: %w[all friend])
+  scope :self_can_see, where(who_can_see: %w[all friend self])
+
   has_many :sorts, dependent: :destroy
   has_many :categories, through: :sorts
 
@@ -38,6 +42,16 @@ class Post < ApplicationRecord
   def set_draft
     self.status = 'draft'
     save
+  end
+
+  def who_can_see?(user)
+    if current_user == user
+      self_can_see
+    elsif current_user.friend?(user)
+      friend_can_see
+    else
+      all_can_see
+    end
   end
 
   def publish?
