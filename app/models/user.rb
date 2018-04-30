@@ -23,25 +23,32 @@ class User < ApplicationRecord
 
   # friendship
   has_many :friendships, dependent: :destroy
-  has_many :friends, through: :friendships, source: :user
+  has_many :friends, through: :friendships
   has_many :inverse_friendships, class_name: 'Friendship',
                                  foreign_key: 'friend_id'
-  has_many :require_friends, through: :inverse_friendships, source: :user
+  has_many :inverse_friends, through: :inverse_friendships, source: :user
 
   def admin?
     role == 'admin'
   end
 
-  def friending?(user)
-    friendings.include?(user)
+  # Is there some guy not accept my permision yet?
+  def waiting?(user)
+    friendships.not_accept.include?(friend_id: user)
   end
 
-  def friend?
-    friending? && friendships.accept
+  # Is there someone asked me to accept or not?
+  def accept_or_not?(user)
+    inverse_friendships.accept.include?(user)
   end
 
-  def was_ignored?
-    friending? && !friendship.accept
+  def friend?(user)
+    friendships.accept.include?(user) &&
+      inverse_friendships.accept.include?(user)
+  end
+
+  def all_friends
+    (friendships.accept.friends + inverse_friendships.accept.friends).uniq
   end
 
   def collecting?(post)
