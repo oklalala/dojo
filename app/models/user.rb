@@ -33,18 +33,23 @@ class User < ApplicationRecord
   end
 
   # Is there some guy not accept my permision yet?
+  # me he not checked
+  # he me checked
+  # I'm accepting you!!!
   def waiting?(user)
-    friendships.not_accept.include?(friend_id: user)
+    accepting(user)
   end
 
   # Is there someone asked me to accept or not?
+  # me he checked
+  # he me not checked
+  # I was accepted.
   def accept_or_not?(user)
-    inverse_friendships.accept.include?(user)
+    accepted(user)
   end
 
   def friend?(user)
-    friendships.accept.include?(user) &&
-      inverse_friendships.accept.include?(user)
+    accepted(user) && accepting(user)
   end
 
   def all_friends
@@ -53,5 +58,16 @@ class User < ApplicationRecord
 
   def collecting?(post)
     collected_posts.include?(post)
+  end
+
+  private
+
+  # A ask user to accepting
+  def accepting(user)
+    !inverse_friendships.accept.inverse_exist(user).empty?
+  end
+
+  def accepted(user)
+    !friendships.accept.exist(user).empty?
   end
 end

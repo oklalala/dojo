@@ -7,4 +7,6 @@ class Friendship < ApplicationRecord
 
   scope :accept, -> { where(accept: true) }
   scope :not_accept, -> { where(accept: false) }
+  scope :exist, ->(id) { where(friend_id: id) }
+  scope :inverse_exist, ->(id) { where(user_id: id) }
 end
