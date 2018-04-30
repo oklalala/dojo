@@ -11,6 +11,7 @@
       <% if user == current_user %>
         <%= link_to "Edit Profile", edit_user_path(user), class: "btn btn-success" %>
       <% else %>
+        <%= render 'shared/friend', user: user %>
         <%= link_to "Follow", user_path(user), class: "btn btn-success" %>
       <% end %>
     </div>
