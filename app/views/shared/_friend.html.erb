@@ -1,0 +1,10 @@
+<% if user.asking?(current_user) %>
+  <%= link_to 'Accept', unfriend_user_path(user), method: :post, class: "btn btn-info" %>
+  <%= link_to 'Ignore', unfriend_user_path(user), method: :post, class: "btn btn-info" %>
+<% elsif user.accept?(current_user) %>
+  <%= link_to 'Unfriend', unfriend_user_path(user), method: :post, class: "btn btn-primary" %>
+<% elsif user.ignore?(current_user) %>
+  <%= button_tah "Requisted", class: "btn btn-primary" %>
+<% else %>
+  <%= link_to 'Friend', friend_user_path(user), method: :post, class: "btn btn-primary" %>
+<% end %>
