@@ -99,7 +99,7 @@ namespace :dev do
   task fake_friendship: :environment do
     Friendship.destroy_all
     User.all.each do |user|
-      rand_user = User.select { |x| x != user }.sample(5)
+      rand_user = User.where.not(id: user).sample(5)
       rand(5).times do |i|
         user.friendships.create!(
           user_id: user.id,
