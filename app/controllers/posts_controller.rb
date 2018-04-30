@@ -6,12 +6,13 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
   impressionist action: %i[show index]
   def index
-    @posts = Post.page(params[:page]).per(10)
+    @search = Post.ransack(params[:q])
+    @posts = @search.result.includes(:comments).page(params[:page]).per(10)
+    # @search.build_condition
     @categories = Category.all
   end
 
   def show
-    impressionist(@post, 'message???')
     @comments = @post.comments
     @comment = Comment.new
   end
@@ -88,7 +89,7 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :content, :photo, :status,
                                  :comments_count, :viewed_count, :who_can_see,
-                                 category_ids: [])
+                                 :last_reply_at, category_ids: [])
   end
 
   def post_redirect(post)

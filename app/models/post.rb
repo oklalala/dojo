@@ -18,10 +18,6 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy, counter_cache: true
   has_many :commented_users, through: :comments, source: :user
 
-  def replies_count
-    comments.count
-  end
-
   def collected?(user)
     collected_users.include?(user)
   end
