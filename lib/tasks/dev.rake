@@ -4,10 +4,10 @@ namespace :dev do
   task fake_all: :environment do
     Rake::Task['db:seed'].execute
     Rake::Task['dev:fake_user'].execute
-    # Rake::Task['dev:fake_friendship'].execute
+    Rake::Task['dev:fake_friendship'].execute
     Rake::Task['dev:fake_post'].execute
     Rake::Task['dev:fake_comment'].execute
-    # Rake::Task['dev:fake_collect'].execute
+    Rake::Task['dev:fake_collect'].execute
     Rake::Task['dev:fake_sort'].execute
   end
 
@@ -36,9 +36,9 @@ namespace :dev do
       Post.create!(
         id: i + 1,
         photo: file,
-        title: FFaker::Name.first_name,
-        content: FFaker::Lorem.paragraph,
-        status: nil,
+        title: FFaker::Lorem.sentence(rand(1..5)),
+        content: FFaker::Lorem.sentence,
+        status: [nil, 'draft', 'publish'].sample,
         comments_count: rand(20),
         viewed_count: rand(60),
         who_can_see: nil,
@@ -67,7 +67,8 @@ namespace :dev do
     Comment.destroy_all
     Post.all.each do |post|
       rand(6).times do
-        post.comments.create!(
+        Comment.create!(
+          post: post,
           content: FFaker::Lorem.paragraph,
           user: User.all.sample
         )
@@ -78,21 +79,21 @@ namespace :dev do
   end
 
   task fake_collect: :environment do
-    collect.destroy_all
+    Collect.destroy_all
     User.all.each do |user|
-      rand(50).times do
+      rand(10).times do
         user.collects.create!(
           user_id: user.id,
           post_id: Post.all.sample.id
         )
       end
     end
-    Post.all.each do |post|
-      post.collects_count = Collect.where(post_id: post.id).count
-      post.save
-    end
+    # Post.all.each do |post|
+    #   post.collects_count = Collect.where(post_id: post.id).count
+    #   post.save
+    # end
     puts 'have created fake collects'
-    puts "now you have #{collect.count} collects data"
+    puts "now you have #{Collect.count} collects data"
   end
 
   task fake_friendship: :environment do
