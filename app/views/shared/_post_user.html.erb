@@ -8,7 +8,7 @@
         </h5>
         <div class="text-center">
           <% if comment.user == current_user %>
-            <%= link_to "Edit", edit_user_path, class: "btn btn-success" %>
+            <%= link_to "Edit", edit_user_path(comment.user), class: "btn btn-success" %>
           <% else %>
             <%= render 'shared/friend', user: comment.user %>
             <%= link_to "Add Friend", posts_path, class: "btn btn-secondary" %>
