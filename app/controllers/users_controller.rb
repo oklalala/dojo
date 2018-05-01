@@ -4,7 +4,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[edit update show comment collect draft friend]
   def show
-    @posts = @user.posts.who_can_see?(@user)
+    @posts = @user.posts.all
   end
 
   def comment
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def collect
-    @collected_posts = @user.collected_posts.who_can_see?(@user)
+    @collected_posts = @user.collected_posts.all
   end
 
   def draft
@@ -20,8 +20,8 @@ class UsersController < ApplicationController
   end
 
   def friend
-    @waiting = @user.frinedship.where(accept: false)
-    @accept_or_not = @user.inverse_friendship.where(accept: false)
+    @waiting = @user.waiting
+    @accept_or_not = @user.accept_or_not
     @friend = @user.all_friends
   end
 

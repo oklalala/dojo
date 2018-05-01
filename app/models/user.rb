@@ -28,6 +28,14 @@ class User < ApplicationRecord
                                  foreign_key: 'friend_id'
   has_many :inverse_friends, through: :inverse_friendships, source: :user
 
+  scope :accept_or_not, -> {
+    joins(friendships: { accept: true })
+      # .joins(inverse_friendships: { accept: false })
+  }
+  scope :waiting, -> {
+    joins(inverse_friendships: { accept: true })
+      .joins(friendships: { accept: false })
+  }
   def admin?
     role == 'admin'
   end
@@ -53,7 +61,7 @@ class User < ApplicationRecord
   end
 
   def all_friends
-    (friendships.accept.friends + inverse_friendships.accept.friends).uniq
+    (inverse_friendships.accept && friendships.accept).uniq
   end
 
   def collecting?(post)

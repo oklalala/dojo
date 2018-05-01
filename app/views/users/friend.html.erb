@@ -2,6 +2,6 @@
 <%= render "shared/index_nav", user: @user %>
 
 
-<%= render "shared/post_user", user: @waiting %>
-<%= render "shared/post_user", user: @accept_or_not %>
-<%= render "shared/post_user", user: @friend %>
+<%= render "shared/friend_list", users: @waiting %>
+<%= render "shared/friend_list", users: @accept_or_not %>
+<%= render "shared/friend_list", users: @friend %>

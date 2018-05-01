@@ -56,8 +56,8 @@ class PostsController < ApplicationController
   end
 
   def feeds
-    @posts = Post.order(comment_count: :desc).limit(10)
-    @users = User.order(comment_count: :desc).limit(10)
+    @posts = Post.order(comments_count: :desc).limit(10)
+    @users = User.order(comments_count: :desc).limit(10)
   end
 
   def collect

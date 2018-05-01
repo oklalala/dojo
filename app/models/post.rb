@@ -9,10 +9,18 @@ class Post < ApplicationRecord
 
   belongs_to :user
 
-  scope :all_can_see, where(who_can_see: %w[all])
-  scope :friend_can_see, where(who_can_see: %w[all friend])
-  scope :self_can_see, where(who_can_see: %w[all friend self])
+  scope :all_can_see, -> { where.not(who_can_see: %w[self friend]) }
+  scope :friend_can_see, -> (user){ where.not(who_can_see: 'self')
+    .where(who_can_see: 'friend').where(user_id: user) }
 
+  #   scope :all_can_see, -> { where.not(who_can_see: %w[self friend]) }
+  # scope :friend_only, ->(user) {
+  #   where(who_can_see: 'friend').where(user_id: user)
+  # }
+  # scope :friend_can_see, ->(user) {
+  #   where(who_can_see: ['all', nil])
+  #     .or(where(who_can_see: 'friend').where(user_id: 'test'))
+  # }
   has_many :sorts, dependent: :destroy
   has_many :categories, through: :sorts
 
@@ -45,12 +53,15 @@ class Post < ApplicationRecord
   end
 
   def who_can_see?(user)
-    if current_user == user
-      self_can_see
-    elsif current_user.friend?(user)
-      friend_can_see
+    if user_id == user && who_can_see == 'self'
+      puts 'my self'
+      Post.all
+    elsif self.user.friend?(user) && who_can_see == 'friend'
+      puts 'my friend'
+      Post.friend_can_see(user)
     else
-      all_can_see
+      puts 'all'
+      Post.all_can_see
     end
   end
 
