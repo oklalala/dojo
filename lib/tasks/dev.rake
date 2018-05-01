@@ -21,7 +21,8 @@ namespace :dev do
         avatar: File.new(Rails.root.join('app', 'assets', 'images', avatar)),
         email: FFaker::Internet.email,
         intro: FFaker::Lorem.paragraph,
-        password: '123123'
+        password: '123123',
+        comments_count: rand(20)
       )
     end
     puts 'have created fake users'
