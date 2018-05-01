@@ -70,6 +70,10 @@ class User < ApplicationRecord
     collected_posts.include?(post)
   end
 
+  def generate_authentication_token
+    self.authentication_token = Devise.friendly_token
+  end
+
   private
 
   # A ask user to accepting
@@ -79,9 +83,5 @@ class User < ApplicationRecord
 
   def accepted(user)
     !friendships.accept.exist(user).empty?
-  end
-
-  def generate_authentication_token
-    self.authentication_token = Devise.friendly_token
   end
 end

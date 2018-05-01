@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_30_012702) do
+ActiveRecord::Schema.define(version: 2018_05_01_151108) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 2018_04_30_012702) do
     t.boolean "accept"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "friend_requests", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "friend_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["friend_id"], name: "index_friend_requests_on_friend_id"
+    t.index ["user_id"], name: "index_friend_requests_on_user_id"
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -114,7 +123,10 @@ ActiveRecord::Schema.define(version: 2018_04_30_012702) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "comments_count", default: 0
+    t.string "authentication_token"
+    t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
 end
