@@ -32,4 +32,10 @@ Rails.application.routes.draw do
     resources :categories
     root 'users#index'
   end
+
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :articles, only: %i[index create show update destroy]
+    end
+  end
 end
