@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-1 offset-md-1">
+    <% users.each do |user| %>
+    <div class="card" style="width: 10rem;">
+      <%= image_tag user.avatar.url, class: "card-img-top" %>
+      <!-- <div class="card-body align-center">
+        <h5 class="card-title text-center">
+          <%#= link_to user.name, user_path(user) %>
+        </h5>
+        <div class="text-center">
+          <%# if user == current_user %>
+            <%#= link_to "Edit", edit_user_path, class: "btn btn-success" %>
+          <%# else %>
+            <%#= render 'shared/friend', user: user %>
+            <%#= link_to "Add Friend", posts_path, class: "btn btn-secondary" %>
+          <%# end %>
+        </div>  
+      </div> -->
+    </div>
+  </div>
+  <% end %>
+
+  <!-- user conetnt -->
+  <div class="col-md-8 offset-md-1">
+    <div class="col-md-12">
+      <% if user.avatar? %>
+        <%= image_tag user.avatar.url %>
+      <% end %>
+    </div>
+    <div class="col-md-12">
+      <%= user.content %>
+    </div>
+
+    <% if user.has_attribute?(:status) %>
+      <%= render 'shared/edit_post', user: user %>
+    <% else %>
+      <%= render 'shared/edit_user', user: user %>
+    <% end %>
+    
+  </div>
+</div>
