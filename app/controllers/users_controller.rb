@@ -20,9 +20,9 @@ class UsersController < ApplicationController
   end
 
   def friend
-    @waiting = @user.waiting
-    @accept_or_not = @user.accept_or_not
-    @friend = @user.all_friends
+    # @waiting = @user.waiting
+    # @accept_or_not = @user.accept_or_not
+    # @friend = @user.all_friends
   end
 
   def edit; end

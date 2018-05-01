@@ -51,7 +51,7 @@
           <%= check_box_tag 'post[category_ids][]', category.id, @post.category_ids.include?(category.id), id: dom_id(category), class: 'form-check-input' %>
            <%= label_tag dom_id(category), category.name, class: 'form-check-label' %> <br />
         <% end %>
-        <%= @post.category_ids %>
+        <%#= @post.category_ids %>
       </div>
     </div>
 
