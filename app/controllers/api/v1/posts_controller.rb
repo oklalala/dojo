@@ -1,15 +1,16 @@
 class Api::V1::PostsController < ApiController
   def index
     @posts = Post.all
-    render json: {
-      data: @posts.map do |post|
-        {
-          title: post.title,
-          photo: post.photo,
-          content: post.content
-        }
-      end
-    }
+    # @posts = Post.all
+    # render json: {
+    #   data: @posts.map do |post|
+    #     {
+    #       title: post.title,
+    #       photo: post.photo,
+    #       content: post.content
+    #     }
+    #   end
+    # }
   end
 
   def show
@@ -20,11 +21,12 @@ class Api::V1::PostsController < ApiController
         status: 400
       }
     else
-      render json: {
-        title: @post.title,
-        photo: @post.photo,
-        content: @post.content
-      }
+      render 'api/v1/posts/show'
+      # render json: {
+      #   title: @post.title,
+      #   photo: @post.photo,
+      #   content: @post.content
+      # }
     end
   end
 
