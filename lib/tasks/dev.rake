@@ -43,7 +43,8 @@ namespace :dev do
         comments_count: rand(20),
         viewed_count: rand(60),
         who_can_see: nil,
-        user_id: User.all.sample.id
+        user_id: User.all.sample.id,
+        last_reply_at: Time.now
       )
     end
     puts 'have created fake Posts'
