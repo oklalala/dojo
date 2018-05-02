@@ -30,9 +30,10 @@ class User < ApplicationRecord
                                  foreign_key: 'friend_id'
   has_many :inverse_friends, through: :inverse_friendships, source: :user
 
+
   scope :accept_or_not, -> {
     joins(friendships: { accept: true })
-      # .joins(inverse_friendships: { accept: false })
+      where(role: 'admin')
   }
   scope :waiting, -> {
     joins(inverse_friendships: { accept: true })
@@ -74,7 +75,7 @@ class User < ApplicationRecord
     self.authentication_token = Devise.friendly_token
   end
 
-  private
+  # private
 
   # A ask user to accepting
   def accepting(user)

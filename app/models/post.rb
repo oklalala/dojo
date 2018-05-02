@@ -9,9 +9,9 @@ class Post < ApplicationRecord
 
   belongs_to :user
 
-  scope :all_can_see, -> { where.not(who_can_see: %w[self friend]) }
-  scope :friend_can_see, -> (user){ where.not(who_can_see: 'self')
-    .where(who_can_see: 'friend').where(user_id: user) }
+  # scope :all_can_see, -> { where.not(who_can_see: %w[self friend]) }
+  # scope :friend_can_see, -> (user){ where.not(who_can_see: 'self')
+  #   .or(where(who_can_see: 'friend').where(user_id: user)) }
 
   #   scope :all_can_see, -> { where.not(who_can_see: %w[self friend]) }
   # scope :friend_only, ->(user) {
