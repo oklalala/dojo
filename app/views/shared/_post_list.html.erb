@@ -8,7 +8,7 @@
       </th>
       <th scope="col">Title</th>
       <th scope="col">
-        <%= sort_link @search, :comments_created_at, "Last replies at"%>
+        <%= sort_link @search, :last_reply_at, "Last replies at", default_order: :desc%>
       </th>
       <th scope="col">
         <%= sort_link @search, :viewed_count, "Viewed count", default_order: :desc%>
@@ -23,7 +23,7 @@
         <td class= "align-middle">
           <span class= "badge badge-secondary"><%= post.comments_count %></span></td>
         <td><%= link_to post.title, post_path(post) %></td>
-        <td><%= post.last_reply %></td>
+        <td><%= post.last_reply_at %></td>
         <td><%= icon 'fa','eye' %> <%= post.viewed_count %></td>
       </tr>
     <% end %>
