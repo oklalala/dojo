@@ -52,7 +52,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     flash[:alert] = "#{@post.title} destroyed"
-    redirect_back(fallback_location: root_path)
+    redirect_to root_path
   end
 
   def feeds
