@@ -3,7 +3,7 @@
   <%= link_to @post.title, post_path(@post), class: "navbar-brand" %>
   <form class="form-inline">
     <%= render 'shared/collect', post: @post %>
-    <%= link_to "comment", post_path(@post), class: "btn btn-outline-secondary m-2 my-sm-0" %>
+    <a href="#comment" class= "btn btn-outline-secondary m-2 my-sm-0">comment</a>
   </form>
 </nav>
 
