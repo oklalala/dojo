@@ -7,13 +7,13 @@ class PostsController < ApplicationController
   impressionist action: %i[show index]
   def index
     @search = Post.ransack(params[:q])
-    @posts = @search.result.includes(:comments).page(params[:page]).per(10)
+    @posts = @search.result.includes(:comments).page(params[:page]).per(20)
     # @search.build_condition
     @categories = Category.all
   end
 
   def show
-    @comments = @post.comments
+    @comments = @post.comments.page(params[:page]).per(20)
     @comment = Comment.new
   end
 

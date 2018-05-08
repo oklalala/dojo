@@ -6,6 +6,6 @@ class CategoriesController < ApplicationController
     @categories = Category.all
     @category = Category.find(params[:id])
     @search = @category.posts.ransack(params[:q])
-    @posts = @search.result.page(params[:page]).per(10)
+    @posts = @search.result.page(params[:page]).per(20)
   end
 end

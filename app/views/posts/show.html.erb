@@ -16,19 +16,27 @@
 <% end %>
 <br>
 
-<!-- post new comment -->
-<div class="form-horizontal">
-  <%= form_for [@post,@comment] do |f| %>
-    <div class="form-group offset-md-1 col-md-10">
-      <%= f.text_area :content, size: "60x12", placeholder: "What's on your mind?", class: "rounded form-control" %>
-    </div>
-    <div class="col-sm-6">
-      <% if @comment.errors.any? %>
-        <%= @comment.errors.full_messages.to_sentence %>
-      <% end %>
-    </div>
-    <div class="col-md-11 text-right">
-      <%= f.submit "comment", class: "btn btn-primary" %>
-    </div>
-  <% end %>
+<%# paginate %>
+<div class="container pagination justify-content-center" >
+  <%= paginate @comments, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm" %>
 </div>
+
+<!-- post new comment -->
+<section id="comment">
+  <div class="form-horizontal">
+    <%= form_for [@post,@comment] do |f| %>
+      <div class="form-group offset-md-1 col-md-10">
+        <%= f.text_area :content, size: "60x12", placeholder: "What's on your mind?", class: "rounded form-control" %>
+      </div>
+      <div class="col-sm-6">
+        <% if @comment.errors.any? %>
+          <%= @comment.errors.full_messages.to_sentence %>
+        <% end %>
+      </div>
+      <div class="col-md-11 text-right">
+        <%= f.submit "comment", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</section>
+
