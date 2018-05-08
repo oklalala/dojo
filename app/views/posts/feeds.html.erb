@@ -41,13 +41,13 @@
     <hr />
     <ol class= "text-center">
       <% @posts.each do |post| %>
-        <li class= "h3">
+        <li class= "h5">
           <div class="row">
-            <div class="col-md-6 text-right">
+            <div class="col-md-6 text-left">
               <%= link_to post.title, post_path(post) %>
             </div> 
             <div class="col-md-6">
-              <%= post.last_reply %>
+              <%= post.comments_count %>
             </div>
           </div>
         </li>

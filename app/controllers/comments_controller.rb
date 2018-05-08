@@ -12,6 +12,8 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = @post.comments.new(comment_params)
     @comment.user = current_user
+    @post.last_reply_at = Time.now
+    @post.save
     if @comment.save
       flash[:notice] = 'comment was successfully created'
     else
