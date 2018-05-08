@@ -42,13 +42,19 @@ group :development, :test do
   # and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'sqlite3'
+
+  gem 'hirb', require: false
+  gem 'hirb-unicode', require: false
+  # gem 'pry-plus'
 end
 
 group :development do
   # Access an interactive console on exception pages
   # or by calling 'console' anywhere in the code.
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'web-console', '~> 3.6.1'
+  gem 'web-console', '~> 3.1.1'
+  
+  gem 'pry-remote'
   # Spring speeds up development by keeping your application running
   # in the background. Read more: https://github.com/rails/spring
   gem 'spring'
@@ -66,6 +72,9 @@ end
 group :production do
   gem 'pg', '~> 0.18'
 end
+
+gem 'awesome_print', require: false
+gem 'pry-rails'
 
 # add all the gem you want!
 gem 'devise'
