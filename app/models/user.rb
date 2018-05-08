@@ -62,14 +62,10 @@ class User < ApplicationRecord
     self.authentication_token = Devise.friendly_token
   end
 
-  # private
-
-  # A ask user to accepting
-  def accepting(user)
-    !inverse_friendships.accept.inverse_exist(user).empty?
-  end
-
-  def accepted(user)
-    !friendships.accept.exist(user).empty?
+  def default_avatar
+    if !self.avatar?
+      self.remote_avatar_url = "http://www.gogecko.com.au/images/avatar.png"
+      self.save
+    end
   end
 end
