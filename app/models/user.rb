@@ -25,46 +25,33 @@ class User < ApplicationRecord
 
   # friendship
   has_many :friendships, dependent: :destroy
-  has_many :friends, through: :friendships
-  has_many :inverse_friendships, class_name: 'Friendship',
-                                 foreign_key: 'friend_id'
-  has_many :inverse_friends, through: :inverse_friendships, source: :user
+  has_many :friends, -> { where('friendships.accept = 1') }, through: :friendships
+  has_many :waiting, -> { where('friendships.accept = 0') }, through: :friendships, source: :friend
 
+  has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
+  has_many :inverse_friends, -> { where('friendships.accept = 1') }, through: :inverse_friendships, source: :user
+  has_many :accept_or_not, -> { where('friendships.accept = 0') }, through: :inverse_friendships, source: :user
 
-  scope :accept_or_not, -> {
-    joins(friendships: { accept: true })
-      where(role: 'admin')
-  }
-  scope :waiting, -> {
-    joins(inverse_friendships: { accept: true })
-      .joins(friendships: { accept: false })
-  }
+  after_validation :default_avatar
+
   def admin?
     role == 'admin'
   end
 
-  # Is there some guy not accept my permision yet?
-  # me he not checked
-  # he me checked
-  # I'm accepting you!!!
   def waiting?(user)
-    accepting(user)
+    waiting.include?(user)
   end
 
-  # Is there someone asked me to accept or not?
-  # me he checked
-  # he me not checked
-  # I was accepted.
   def accept_or_not?(user)
-    accepted(user)
+    accept_or_not.include?(user)
   end
 
   def friend?(user)
-    accepted(user) && accepting(user)
+    friends.include?(user) & inverse_friends.include?(user)
   end
 
   def all_friends
-    (inverse_friendships.accept && friendships.accept).uniq
+    friends & inverse_friends
   end
 
   def collecting?(post)

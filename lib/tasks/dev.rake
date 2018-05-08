@@ -40,9 +40,7 @@ namespace :dev do
         title: FFaker::Lorem.sentence(rand(1..5)),
         content: FFaker::Lorem.sentence,
         status: [nil, 'draft', 'publish'].sample,
-        comments_count: rand(20),
-        viewed_count: rand(60),
-        who_can_see: nil,
+        who_can_see: %w[all friend self].sample,
         user_id: User.all.sample.id,
         last_reply_at: Time.now
       )
