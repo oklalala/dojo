@@ -1,4 +1,6 @@
 <%= render "shared/user_profile", user: @user %>
 <%= render "shared/index_nav", user: @user %>
 
-<%= render "shared/user_posts", posts: @posts %>
+<% if @user == current_user%>
+  <%= render "shared/user_posts", posts: @posts %>
+<% end %>

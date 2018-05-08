@@ -5,8 +5,10 @@
     <%= link_to "My comment", comment_user_path(user), class: "nav-link #{active_class?(comment_user_path)}" %></li>
   <li role="presentation" class="nav-item">
     <%= link_to "My collect", collect_user_path(user), class: "nav-link #{active_class?(collect_user_path)}" %></li>
-  <li role="presentation" class="nav-item">
-    <%= link_to "My Draft", draft_user_path(user), class: "nav-link #{active_class?(draft_user_path)}" %></li>
-  <li role="presentation" class="nav-item">
-    <%= link_to "My Friend", friend_user_path(user), class: "nav-link #{active_class?(friend_user_path)}" %></li>
+  <% if current_user == user %>
+    <li role="presentation" class="nav-item">
+      <%= link_to "My Draft", draft_user_path(user), class: "nav-link #{active_class?(draft_user_path)}" %></li>
+    <li role="presentation" class="nav-item">
+      <%= link_to "My Friend", friend_user_path(user), class: "nav-link #{active_class?(friend_user_path)}" %></li>
+  <% end %>
 </ul>
