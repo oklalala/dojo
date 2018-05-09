@@ -97,7 +97,6 @@ namespace :dev do
   end
 
   task fake_friendship: :environment do
-    Friendship.destroy_all
     User.all.each do |user|
       rand_user = User.where.not(id: user).sample(5)
       rand(5).times do |i|
