@@ -1,10 +1,14 @@
-<% if user.friend?(current_user) %>
-  <%= link_to 'Unfriend', user_path(user), class: "btn btn-primary" %>
-<% elsif user.accept_or_not?(current_user) %>
-  <%= link_to 'Accept', user_path(user), class: "btn btn-info inline" %>
-  <%= link_to 'Ignore', user_path(user), class: "btn btn-warning inline" %>
-<% elsif user.waiting?(current_user) %>
-  <%= button_tag "Requisted", class: "btn btn-primary" %>
+<% if user == current_user %>
+  <%= link_to 'Edit', edit_user_path(user) %>
 <% else %>
-  <%= link_to 'Friend', user_path(user), class: "btn btn-primary" %>
+  <% if current_user.waiting?(user)%>
+    <%= button_tag 'Waiting', class: 'btn btn-outline-secondary' %>
+    <%= link_to 'Cansel requist', friendship_path(user), method: :delete %>
+  <% elsif current_user.accept_or_not?(user) %>
+    <%= link_to 'Accept', accept_friendship_path(user), method: :post, class: 'btn btn-light' %>
+  <% elsif current_user.friend?(user) %>
+    <%= link_to 'Unfriend', friendship_path(user), method: :delete, class: 'btn btn-secondary' %>
+  <% else %>      
+    <%= link_to 'Add Friend', friendships_path(friend_id: user), method: :post, class: 'btn btn-secondary'  %>
+  <% end %>
 <% end %>
