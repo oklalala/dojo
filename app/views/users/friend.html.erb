@@ -2,18 +2,20 @@
 <% if current_user == @user %>
   <%= render "shared/index_nav", user: @user %>
 
-  <!-- <h1>朋友系統維護中</h1> -->
   <div class="text-center row">
+
     <div class="col-md-12">
       <h4 class='text-secondary my-3'>Waiting for response</h2>
       <%= render "shared/friend_list", users: @waiting %>
     </div>
     <br />
+
     <div class="col-md-12 bg-secondary">
       <h4 class='text-white my-3'>Respond to Your Friend Request</h2>
       <%= render "shared/friend_list", users: @accept_or_not %>
     </div>
     <br />
+    
     <div class="col-md-12">
       <h4 class='text-secondary my-3'>Your friends</h2>
       <%= render "shared/friend_list", users: @friends %>
