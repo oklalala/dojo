@@ -12,7 +12,7 @@ namespace :dev do
   end
 
   task fake_user: :environment do
-    num = [*0..72].sample(20)
+    num = [*0..72].sample(30)
     30.times do |i|
       avatar = "pic1_#{num[i].to_s.rjust(3, '0')}.jpg"
       User.create!(
@@ -40,7 +40,7 @@ namespace :dev do
         title: FFaker::Lorem.sentence(rand(1..5)),
         content: FFaker::Lorem.sentence,
         status: [nil, 'draft', 'publish'].sample,
-        who_can_see: %w[all friend self].sample,
+        who_can_see: %w[all friends self].sample,
         user_id: User.all.sample.id,
         last_reply_at: Time.now
       )

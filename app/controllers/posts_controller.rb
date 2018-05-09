@@ -3,10 +3,10 @@
 # hahaha
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
-  before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_post, only: %i[show edit update destroy collect uncollect]
   impressionist action: %i[show index]
   def index
-    @search = Post.ransack(params[:q])
+    @search = Post.authority(current_user).ransack(params[:q])
     @posts = @search.result.includes(:comments).page(params[:page]).per(20)
     # @search.build_condition
     @categories = Category.all
@@ -29,6 +29,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    @post.last_reply_at = Time.now
     set_post_status
 
     if @post.save
@@ -41,6 +42,7 @@ class PostsController < ApplicationController
 
   def update
     set_post_status
+    @post.last_reply_at = Time.now
     if @post.update(post_params)
       post_redirect(@post)
     else
@@ -56,18 +58,16 @@ class PostsController < ApplicationController
   end
 
   def feeds
-    @posts = Post.order(comments_count: :desc).limit(10)
+    @posts = Post.authority(current_user).order(comments_count: :desc).limit(10)
     @users = User.order(comments_count: :desc).limit(10)
   end
 
   def collect
-    @post = Post.find(params[:id])
     Collect.create!(post: @post, user: current_user)
     redirect_back(fallback_location: root_path)
   end
 
   def uncollect
-    @post = Post.find(params[:id])
     collects = Collect.where(post: @post, user: current_user)
     collects.destroy_all
     redirect_back(fallback_location: root_path)
@@ -102,20 +102,8 @@ class PostsController < ApplicationController
   end
 
   def set_post_status
-    @post.status = 'draft' if drafting?
-    @post.status = 'publish' if publishing?
-    @post.status = nil if unpublishing?
-  end
-
-  def publishing?
-    params[:commit] == 'Publish'
-  end
-
-  def unpublishing?
-    params[:commit] == 'Unpublish'
-  end
-
-  def drafting?
-    params[:commit] == 'Draft'
+    @post.status = 'draft' if params[:commit] == 'Draft'
+    @post.status = 'publish' if params[:commit] == 'Publish'
+    @post.status = nil if params[:commit] == 'Unpublish'
   end
 end

@@ -1,7 +1,7 @@
 class Api::V1::PostsController < ApiController
   before_action :authenticate_user!, except: :index
   def index
-    @posts = Post.all
+    @posts = Post.authority(current_user)
     # @posts = Post.all
     # render json: {
     #   data: @posts.map do |post|

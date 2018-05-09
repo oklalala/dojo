@@ -33,6 +33,7 @@ User.create(
   avatar: File.new(Rails.root.join('app', 'assets', 'images', photo))
 )
 
+photo = "pic1_#{rand(72).to_s.rjust(3, '0')}.jpg"
 User.create(
   id: 2,
   name: 'Cococa',

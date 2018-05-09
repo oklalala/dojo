@@ -27,6 +27,7 @@
       <% end %>
       <%= form.file_field :photo, class: 'form-control-file' %>
     </div>
+    
     <div class="form-group">
       <%= form.label :who_can_see %>
       <div class="form-check form-check-inline">
@@ -34,11 +35,11 @@
         <label class="form-check-label" for="inlineRadio1">All</label>
       </div>
       <div class="form-check form-check-inline">
-        <%= form.radio_button :who_can_see, 'friend', class: 'form-check-input' %>
+        <%= form.radio_button :who_can_see, 'friends', class: 'form-check-input' %>
         <label class="form-check-label" for="inlineRadio2">Friend</label>
       </div>
       <div class="form-check form-check-inline">
-        <%= form.radio_button :who_can_see, 'myself', class: 'form-check-input' %>
+        <%= form.radio_button :who_can_see, 'self', class: 'form-check-input' %>
         <label class="form-check-label" for="inlineRadio3">Myself</label>
       </div>
       <%#= form.text_field :who_can_see %>
@@ -49,7 +50,7 @@
         <%= hidden_field_tag 'post[category_ids][]',nil %>
         <% @categories.each do |category| %>
           <%= check_box_tag 'post[category_ids][]', category.id, @post.category_ids.include?(category.id), id: dom_id(category), class: 'form-check-input' %>
-           <%= label_tag dom_id(category), category.name, class: 'form-check-label' %> <br />
+          <%= label_tag dom_id(category), category.name, class: 'form-check-label' %> <br />
         <% end %>
         <%#= @post.category_ids %>
       </div>
@@ -64,8 +65,8 @@
 
     <div class="actions btn-inline">
       <% if @post.publish?%>
-        <%= form.submit 'Update', class: 'btn btn-secondary' %>
-        <%= form.submit 'Unpublish', class: 'btn btn-primary' %>
+        <%= form.submit 'Unpublish', class: 'btn btn-outline-secondary' %>
+        <%= form.submit 'Update', class: 'btn btn-outline-primary' %>
       <% else%>
         <%= form.submit 'Draft', class: 'btn btn-secondary' %>
         <%= form.submit 'Publish', class: 'btn btn-primary' %>

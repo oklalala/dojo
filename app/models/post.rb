@@ -9,7 +9,7 @@ class Post < ApplicationRecord
 
   belongs_to :user
 
-  # scope :all_can_see, -> { where.not(who_can_see: %w[self friend]) }
+  scope :all_can_see, -> { where.not(who_can_see: %w[self friends]) }
   # scope :friend_can_see, -> (user){ where.not(who_can_see: 'self')
   #   .or(where(who_can_see: 'friend').where(user_id: user)) }
 
@@ -71,5 +71,15 @@ class Post < ApplicationRecord
 
   def draft?
     status == 'draft'
+  end
+
+  def self.authority(user)
+    if user
+      Post.where(who_can_see: ['all', nil])
+          .or(where(who_can_see: 'friends', user: user.all_friends))
+          .or(where(user: user))
+    else
+      Post.all_can_see
+    end
   end
 end
