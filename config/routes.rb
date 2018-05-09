@@ -25,7 +25,11 @@ Rails.application.routes.draw do
       get :friend
     end
   end
-  resources :friendships, only: %i[create destroy]
+  resources :friendships, only: %i[create destroy] do
+    member do
+      post :accept
+    end
+  end
 
   namespace :admin do
     resources :users, only: %i[index edit update]
