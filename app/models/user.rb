@@ -47,11 +47,11 @@ class User < ApplicationRecord
   end
 
   def friend?(user)
-    friends.include?(user) & inverse_friends.include?(user)
+    friends.include?(user) | inverse_friends.include?(user)
   end
 
   def all_friends
-    friends & inverse_friends
+    friends | inverse_friends
   end
 
   def collecting?(post)
