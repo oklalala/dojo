@@ -1,0 +1,23 @@
+<ul>
+
+  <% @users.each do |user| %>
+    <li>
+      <%= user.name %>
+      <% if user == current_user %>
+        <%= link_to 'Edit', edit_user_path(user) %>
+      <% else %>
+        <% if current_user.waiting?(user)%>
+          <%= button_tag 'Waiting' %>
+          <%= link_to 'Cansel requist', friendship_path(user), method: :delete %>
+        <% elsif current_user.accept_or_not?(user) %>
+          <%= link_to 'Accept', accept_friendship_path(user), method: :post %>
+        <% elsif current_user.friend?(user) %>
+          <%= link_to 'Unfriend', friendship_path(user), method: :delete %>
+        <% else %>      
+          <%= link_to 'Friend', friendships_path(friend_id: user), method: :post  %>
+        <% end %>
+      <% end %>
+    </li>
+  <% end %>
+
+</ul>
