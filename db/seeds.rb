@@ -44,9 +44,3 @@ User.create(
   avatar: File.new(Rails.root.join('app', 'assets', 'images', photo))
 )
 puts 'Default admin created!'
-
-Friendship.destroy_all
-Friendship.create(user_id: 1, friend_id: 2, accept: false)
-Friendship.create(user_id: 1, friend_id: 3, accept: true)
-Friendship.create(user_id: 4, friend_id: 1, accept: false)
-Friendship.create(user_id: 5, friend_id: 1, accept: true)
