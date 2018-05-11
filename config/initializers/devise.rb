@@ -40,8 +40,8 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  # config.authentication_keys = [:email]
-  config.authentication_keys = [:name]
+  config.authentication_keys = [:email]
+  # config.authentication_keys = [:name]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -71,7 +71,7 @@ Devise.setup do |config|
   # given strategies, for example, `config.http_authenticatable = [:database]` will
   # enable it only for database authentication. The supported strategies are:
   # :database      = Support basic authentication with authentication key + password
-  # config.http_authenticatable = false
+  config.http_authenticatable = false
 
   # If 401 status code should be returned for AJAX requests. True by default.
   # config.http_authenticatable_on_xhr = true
@@ -267,7 +267,7 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(scope: :user).unshift :some_external_strategy
   # end
-  config.secret_key = '1b6aeb128631aac24236df684e10b1e13101cf5b7c641a4103c3a87c9fd307f20ea4ffdca4fdcef13d63a1323cca3a7f99ab677073f89519f72fe0a98285bfba'
+  # config.secret_key = '1b6aeb128631aac24236df684e10b1e13101cf5b7c641a4103c3a87c9fd307f20ea4ffdca4fdcef13d63a1323cca3a7f99ab677073f89519f72fe0a98285bfba'
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine
   # is mountable, there are some extra configurations to be taken into account.

@@ -97,11 +97,6 @@ namespace :dev do
   end
 
   task fake_friendship: :environment do
-    Friendship.destroy_all
-    Friendship.create!(user_id: 1, friend_id: 2, accept: false)
-    Friendship.create!(user_id: 1, friend_id: 3, accept: true)
-    Friendship.create!(user_id: 4, friend_id: 1, accept: false)
-    Friendship.create!(user_id: 5, friend_id: 1, accept: true)
     User.all.each do |user|
       rand_user = User.where.not(id: user).sample(5)
       rand(5).times do |i|
