@@ -49,6 +49,8 @@ group :development, :test do
 end
 
 group :development do
+  gem 'capistrano-rails'
+  gem 'capistrano-passenger'
   # Access an interactive console on exception pages
   # or by calling 'console' anywhere in the code.
   gem 'listen', '>= 3.0.5', '< 3.2'
@@ -70,7 +72,8 @@ group :test do
 end
 
 group :production do
-  gem 'pg', '~> 0.18'
+  # gem 'pg', '~> 0.18'
+  gem 'mysql2', '< 0.5'
 end
 
 gem 'awesome_print', require: false
