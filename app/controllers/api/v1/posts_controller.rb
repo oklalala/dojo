@@ -1,33 +1,33 @@
 class Api::V1::PostsController < ApiController
   before_action :authenticate_user!, except: :index
   def index
-    @posts = Post.authority(current_user)
-    # @posts = Post.all
-    # render json: {
-    #   data: @posts.map do |post|
-    #     {
-    #       title: post.title,
-    #       photo: post.photo,
-    #       content: post.content
-    #     }
-    #   end
-    # }
+    # @posts = Post.where(who_can_see: 'all')
+    @posts = Post.all
+    render json: {
+      data: @posts.map do |post|
+        {
+          title: post.title,
+          photo: post.photo,
+          content: post.content
+        }
+      end
+    }
   end
 
   def show
-    @photo = Photo.find_by(id: params[:id])
-    if !@photo
+    @post = Post.find_by(id: params[:id])
+    if !@post
       render json: {
-        message: "Can't find the photo!",
+        message: "Can't find the post!",
         status: 400
       }
     else
-      render 'api/v1/posts/show'
-      # render json: {
-      #   title: @post.title,
-      #   photo: @post.photo,
-      #   content: @post.content
-      # }
+      # render 'api/v1/posts/show'
+      render json: {
+        title: @post.title,
+        photo: @post.photo,
+        content: @post.content
+      }
     end
   end
 
@@ -35,7 +35,7 @@ class Api::V1::PostsController < ApiController
     @post = Post.new(post_params)
     if @post.save
       render json: {
-        message: 'post created successfully!',
+        message: 'Post created successfully!',
         result: @post
       }
     else

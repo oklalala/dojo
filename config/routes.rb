@@ -41,7 +41,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post "/login" => "auth#login"
       post "/logout" => "auth#logout"
-      resources :articles, only: %i[index create show update destroy]
+      resources :posts, only: %i[index create show update destroy]
     end
   end
 end
