@@ -24,7 +24,13 @@
           <tr>
             <%= link_to user_path(user) do %>
               <td><%= user.name %></td>
-              <td><%= image_tag user.avatar.url %></td>
+              <td>
+                <%= link_to(user_path(user)) do %>
+                  <div class="avatar-navi">
+                    <%= image_tag user.avatar.url, class: "img-fluid rounded" %>
+                  </div>
+                <% end %>
+              </td>
               <td><%= user.email %></td>
             <% end %>
               <td><%= form_for [:admin, user] do |f| %>
